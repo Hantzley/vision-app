@@ -26,7 +26,7 @@ filename = None
 #SPARK_TOKEN = ""
 
 # I am using an env variable for the Spark Token. Comment the line below if you
-# are manually setting this variable
+# are manually setting this variable above.
 SPARK_TOKEN = os.environ['SPARK_TOKEN']
 
 
