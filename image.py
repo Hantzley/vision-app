@@ -13,6 +13,7 @@ import requests
 import io
 import os
 from google.cloud import vision
+from google.cloud.vision import types
 
 print_labels = True
 print_web_pages_with_matching_image = True
@@ -32,7 +33,29 @@ SPARK_TOKEN = os.environ['SPARK_TOKEN']
 
 #image_url = "https://api.ciscospark.com/v1/contents/XXXXXXXXXXXXXXXXXXXXXXXXXX"
 #image_url = "https://upload.wikimedia.org/wikipedia/commons/c/c0/Opera_House_and_ferry._Sydney.jpg"
-image_url = "http://justfunfacts.com/wp-content/uploads/2015/11/sydney-opera-house-2.jpg"
+#image_url = "http://justfunfacts.com/wp-content/uploads/2015/11/sydney-opera-house-2.jpg"
+image_url = "https://theautomationblog.com/wp-content/uploads/Micro820.jpg"
+
+
+def detect_text_uri(uri):
+    """Detects text in the file located in Google Cloud Storage or on the Web.
+    """
+    client = vision.ImageAnnotatorClient()
+    image = types.Image()
+    image.source.image_uri = uri
+
+    response = client.text_detection(image=image)
+    texts = response.text_annotations
+    print('Texts:')
+
+    for text in texts:
+        print('\n"{}"'.format(text.description))
+
+        vertices = (['({},{})'.format(vertex.x, vertex.y)
+                    for vertex in text.bounding_poly.vertices])
+
+        print('bounds: {}'.format(','.join(vertices)))
+
 
 if __name__ == '__main__':
 
@@ -118,3 +141,5 @@ if __name__ == '__main__':
 
             for entity in notes.web_entities:
                 print('* Description: ', entity.description)
+
+        detect_text_uri(image_url)
