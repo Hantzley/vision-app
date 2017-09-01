@@ -57,6 +57,28 @@ def detect_text_uri(uri):
         print('bounds: {}'.format(','.join(vertices)))
 
 
+def detect_text(path):
+    """Detects text in the file."""
+    client = vision.ImageAnnotatorClient()
+
+    with io.open(path, 'rb') as image_file:
+        content = image_file.read()
+
+    image = types.Image(content=content)
+
+    response = client.text_detection(image=image)
+    texts = response.text_annotations
+    print('Texts:')
+
+    for text in texts:
+        print('\n"{}"'.format(text.description))
+
+        vertices = (['({},{})'.format(vertex.x, vertex.y)
+                    for vertex in text.bounding_poly.vertices])
+
+        print('bounds: {}'.format(','.join(vertices)))
+
+
 if __name__ == '__main__':
 
     # Check if image is in Spark, and setting the headers with Spark Token
@@ -142,4 +164,9 @@ if __name__ == '__main__':
             for entity in notes.web_entities:
                 print('* Description: ', entity.description)
 
+        print ("Detecting from URI")
         detect_text_uri(image_url)
+
+
+        print ("\n\nDetecting from local image")
+        detect_text(filename)
