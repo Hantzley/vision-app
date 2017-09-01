@@ -164,9 +164,9 @@ if __name__ == '__main__':
             for entity in notes.web_entities:
                 print('* Description: ', entity.description)
 
-        print ("Detecting from URI")
+        print ("Detecting text from URI")
         detect_text_uri(image_url)
 
 
-        print ("\n\nDetecting from local image")
+        print ("\n\nDetecting text from local image")
         detect_text(filename)
