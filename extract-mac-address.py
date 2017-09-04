@@ -132,20 +132,6 @@ if __name__ == '__main__':
         with open(filename, 'wb') as f:
             f.write(response.content)
 
-        # Instantiates a client
-        vision_client = vision.Client()
-
-        # The name of the image file to annotate
-        file_name = os.path.join(
-            os.path.dirname(__file__), filename)
-
-        # Loads the image into memory
-        with io.open(file_name, 'rb') as image_file:
-            content = image_file.read()
-            image = vision_client.image(
-                content=content)
-
-
         #print ("Detecting text from URI")
         #etect_text_uri(image_url)
 
