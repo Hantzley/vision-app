@@ -30,8 +30,8 @@ SPARK_TOKEN = os.environ['SPARK_TOKEN']
 
 
 #image_url = "https://api.ciscospark.com/v1/contents/XXXXXXXXXXXXXXXXXXXXXXXXXX"
-image_url = "https://theautomationblog.com/wp-content/uploads/Micro820.jpg"
-
+#image_url = "https://theautomationblog.com/wp-content/uploads/Micro820.jpg"
+image_url = 'http://www.tp-link.com/resources/images/faq/2008410143049281.jpg'
 
 
 def detect_mac_address(path):
@@ -48,10 +48,17 @@ def detect_mac_address(path):
     texts = response.text_annotations
 
     for text in texts:
+        #Match MAC addresses in format aa:bb:cc:dd:ee:ff or aa-bb-cc-dd-ee-ff
         match_regex = re.compile('^' + '[\:\-]'.join(['([0-9A-F]{1,2})']*6) + '$', re.IGNORECASE)
         mac_addresses = match_regex.findall(text.description)
         if len(mac_addresses) > 0:
             MAC = ':'.join(mac_addresses[0])
+        else:
+            #Match MAC addresses in format aabbccddeeff
+            match_regex = re.compile('^' + '([0-9A-F]{2})'*6 + '$', re.IGNORECASE)
+            mac_addresses = match_regex.findall(text.description)
+            if len(mac_addresses) > 0:
+                MAC = ':'.join(mac_addresses[0])
 
     return MAC
 
