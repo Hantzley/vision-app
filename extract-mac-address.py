@@ -30,8 +30,8 @@ SPARK_TOKEN = os.environ['SPARK_TOKEN']
 
 
 #image_url = "https://api.ciscospark.com/v1/contents/XXXXXXXXXXXXXXXXXXXXXXXXXX"
-#image_url = "https://theautomationblog.com/wp-content/uploads/Micro820.jpg"
-image_url = 'http://www.tp-link.com/resources/images/faq/2008410143049281.jpg'
+image_url = "https://theautomationblog.com/wp-content/uploads/Micro820.jpg"
+#image_url = 'http://www.tp-link.com/resources/images/faq/2008410143049281.jpg'
 
 
 def detect_mac_address(path):
