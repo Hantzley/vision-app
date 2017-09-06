@@ -32,9 +32,9 @@ SPARK_TOKEN = os.environ['SPARK_TOKEN']
 
 
 #image_url = "https://api.ciscospark.com/v1/contents/XXXXXXXXXXXXXXXXXXXXXXXXXX"
-image_url = "https://upload.wikimedia.org/wikipedia/commons/c/c0/Opera_House_and_ferry._Sydney.jpg"
+#image_url = "https://upload.wikimedia.org/wikipedia/commons/c/c0/Opera_House_and_ferry._Sydney.jpg"
 #image_url = "http://justfunfacts.com/wp-content/uploads/2015/11/sydney-opera-house-2.jpg"
-#image_url = "https://theautomationblog.com/wp-content/uploads/Micro820.jpg"
+image_url = "https://theautomationblog.com/wp-content/uploads/Micro820.jpg"
 
 
 def detect_text_uri(uri):
@@ -141,30 +141,30 @@ if __name__ == '__main__':
             notes = image.detect_web()
 
         if notes.pages_with_matching_images and print_web_pages_with_matching_image:
-            print('\nPages with matching images retrieved')
+            print('\n\nPages with matching images retrieved')
 
             for page in notes.pages_with_matching_images:
                 print('Url : ', page.url)
 
         if notes.full_matching_images and print_web_pages_with_full_matching_image:
-            print('\nFull Matches found: ', len(notes.full_matching_images))
+            print('\n\nFull Matches found: ', len(notes.full_matching_images))
 
             for image in notes.full_matching_images:
                 print('Url : ', image.url)
 
         if notes.partial_matching_images and print_web_pages_with_partial_matching_image:
-            print('\nPartial Matches found: ', len(notes.partial_matching_images))
+            print('\n\nPartial Matches found: ', len(notes.partial_matching_images))
 
             for image in notes.partial_matching_images:
                 print('Url : ', image.url)
 
         if notes.web_entities and print_web_entities:
-            print('\nWeb entities found: ', len(notes.web_entities))
+            print('\n\nWeb entities found: ', len(notes.web_entities))
 
             for entity in notes.web_entities:
                 print('* Description: ', entity.description)
 
-        print ("Detecting text from URI")
+        print ("\n\nDetecting text from URI")
         detect_text_uri(image_url)
 
 
