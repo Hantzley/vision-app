@@ -668,13 +668,13 @@ if __name__ == '__main__':
                 filename = imgHeaders[
                     'Content-Disposition'].replace("attachment; ", "").replace('filename', '').replace('=', '').replace('"', '')
             else:
-                print(str(filename) + " is not an image")
+                print(image_url + " is not an image")
                 exit()
         else:
             response = requests.head(image_url)
             if 'image' not in response.headers.get('content-type'):
                 filename = image_url.split("/")[-1]
-                rint(str(filename) + " is not an image")
+                rint(image_url + " is not an image")
                 exit()
         #Image is valid, let's analyse it with Google Vision API
         print ("\n********************** Analysing Image **********************")
