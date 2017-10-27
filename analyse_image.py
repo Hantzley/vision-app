@@ -54,20 +54,24 @@ def detect_faces(path):
     response = client.face_detection(image=image)
     faces = response.face_annotations
 
+    lines = []
+
     # Names of likelihood from google.cloud.vision.enums
     likelihood_name = ('UNKNOWN', 'VERY_UNLIKELY', 'UNLIKELY', 'POSSIBLE',
                        'LIKELY', 'VERY_LIKELY')
-    print('Faces:')
+    lines.append('Faces:')
 
     for face in faces:
-        print('anger: {}'.format(likelihood_name[face.anger_likelihood]))
-        print('joy: {}'.format(likelihood_name[face.joy_likelihood]))
-        print('surprise: {}'.format(likelihood_name[face.surprise_likelihood]))
+        lines.append('anger: {}'.format(likelihood_name[face.anger_likelihood]))
+        lines.append('joy: {}'.format(likelihood_name[face.joy_likelihood]))
+        lines.append('surprise: {}'.format(likelihood_name[face.surprise_likelihood]))
 
         vertices = (['({},{})'.format(vertex.x, vertex.y)
                     for vertex in face.bounding_poly.vertices])
 
-        print('face bounds: {}'.format(','.join(vertices)))
+        lines.append('face bounds: {}'.format(','.join(vertices)))
+
+    return lines
     # [END migration_face_detection]
 # [END def_detect_faces]
 
@@ -84,20 +88,24 @@ def detect_faces_uri(uri):
     response = client.face_detection(image=image)
     faces = response.face_annotations
 
+    lines = []
+
     # Names of likelihood from google.cloud.vision.enums
     likelihood_name = ('UNKNOWN', 'VERY_UNLIKELY', 'UNLIKELY', 'POSSIBLE',
                        'LIKELY', 'VERY_LIKELY')
-    print('Faces:')
+    lines.append('Faces:')
 
     for face in faces:
-        print('anger: {}'.format(likelihood_name[face.anger_likelihood]))
-        print('joy: {}'.format(likelihood_name[face.joy_likelihood]))
-        print('surprise: {}'.format(likelihood_name[face.surprise_likelihood]))
+        lines.append('anger: {}'.format(likelihood_name[face.anger_likelihood]))
+        lines.append('joy: {}'.format(likelihood_name[face.joy_likelihood]))
+        lines.append('surprise: {}'.format(likelihood_name[face.surprise_likelihood]))
 
         vertices = (['({},{})'.format(vertex.x, vertex.y)
                     for vertex in face.bounding_poly.vertices])
 
-        print('face bounds: {}'.format(','.join(vertices)))
+        lines.append('face bounds: {}'.format(','.join(vertices)))
+
+    return lines
 # [END def_detect_faces_uri]
 
 
@@ -114,10 +122,14 @@ def detect_labels(path):
 
     response = client.label_detection(image=image)
     labels = response.label_annotations
-    print('Labels:')
+
+    lines = []
+    lines.append('Labels:')
 
     for label in labels:
-        print(label.description)
+        lines.append(label.description)
+
+    return lines
     # [END migration_label_detection]
 # [END def_detect_labels]
 
@@ -132,10 +144,14 @@ def detect_labels_uri(uri):
 
     response = client.label_detection(image=image)
     labels = response.label_annotations
-    print('Labels:')
+
+    lines = []
+    lines.append('Labels:')
 
     for label in labels:
-        print(label.description)
+        lines.append(label.description)
+
+    return lines
 # [END def_detect_labels_uri]
 
 
@@ -152,14 +168,18 @@ def detect_landmarks(path):
 
     response = client.landmark_detection(image=image)
     landmarks = response.landmark_annotations
-    print('Landmarks:')
+
+    lines = []
+    lines.append('Landmarks:')
 
     for landmark in landmarks:
-        print(landmark.description)
+        lines.append(landmark.description)
         for location in landmark.locations:
             lat_lng = location.lat_lng
-            print('Latitude'.format(lat_lng.latitude))
-            print('Longitude'.format(lat_lng.longitude))
+            lines.append('Latitude'.format(lat_lng.latitude))
+            lines.append('Longitude'.format(lat_lng.longitude))
+
+    return lines
     # [END migration_landmark_detection]
 # [END def_detect_landmarks]
 
@@ -174,10 +194,14 @@ def detect_landmarks_uri(uri):
 
     response = client.landmark_detection(image=image)
     landmarks = response.landmark_annotations
-    print('Landmarks:')
+
+    lines = []
+    lines.append('Landmarks:')
 
     for landmark in landmarks:
-        print(landmark.description)
+        lines.append(landmark.description)
+
+    return lines
 # [END def_detect_landmarks_uri]
 
 
@@ -194,10 +218,14 @@ def detect_logos(path):
 
     response = client.logo_detection(image=image)
     logos = response.logo_annotations
-    print('Logos:')
+
+    lines = []
+    lines.append('Logos:')
 
     for logo in logos:
-        print(logo.description)
+        lines.append(logo.description)
+
+    return lines
     # [END migration_logo_detection]
 # [END def_detect_logos]
 
@@ -212,10 +240,14 @@ def detect_logos_uri(uri):
 
     response = client.logo_detection(image=image)
     logos = response.logo_annotations
-    print('Logos:')
+
+    lines = []
+    lines.append('Logos:')
 
     for logo in logos:
-        print(logo.description)
+        lines.append(logo.description)
+
+    return lines
 # [END def_detect_logos_uri]
 
 
@@ -236,12 +268,16 @@ def detect_safe_search(path):
     # Names of likelihood from google.cloud.vision.enums
     likelihood_name = ('UNKNOWN', 'VERY_UNLIKELY', 'UNLIKELY', 'POSSIBLE',
                        'LIKELY', 'VERY_LIKELY')
-    print('Safe search:')
 
-    print('adult: {}'.format(likelihood_name[safe.adult]))
-    print('medical: {}'.format(likelihood_name[safe.medical]))
-    print('spoofed: {}'.format(likelihood_name[safe.spoof]))
-    print('violence: {}'.format(likelihood_name[safe.violence]))
+    lines = []
+    lines.append('Safe search:')
+
+    lines.append('adult: {}'.format(likelihood_name[safe.adult]))
+    lines.append('medical: {}'.format(likelihood_name[safe.medical]))
+    lines.append('spoofed: {}'.format(likelihood_name[safe.spoof]))
+    lines.append('violence: {}'.format(likelihood_name[safe.violence]))
+
+    return lines
     # [END migration_safe_search_detection]
 # [END def_detect_safe_search]
 
@@ -260,12 +296,14 @@ def detect_safe_search_uri(uri):
     # Names of likelihood from google.cloud.vision.enums
     likelihood_name = ('UNKNOWN', 'VERY_UNLIKELY', 'UNLIKELY', 'POSSIBLE',
                        'LIKELY', 'VERY_LIKELY')
-    print('Safe search:')
 
-    print('adult: {}'.format(likelihood_name[safe.adult]))
-    print('medical: {}'.format(likelihood_name[safe.medical]))
-    print('spoofed: {}'.format(likelihood_name[safe.spoof]))
-    print('violence: {}'.format(likelihood_name[safe.violence]))
+    lines = []
+    lines.append('Safe search:')
+
+    lines.append('adult: {}'.format(likelihood_name[safe.adult]))
+    lines.append('medical: {}'.format(likelihood_name[safe.medical]))
+    lines.append('spoofed: {}'.format(likelihood_name[safe.spoof]))
+    lines.append('violence: {}'.format(likelihood_name[safe.violence]))
 # [END def_detect_safe_search_uri]
 
 
@@ -282,15 +320,19 @@ def detect_text(path):
 
     response = client.text_detection(image=image)
     texts = response.text_annotations
-    print('Texts:')
+
+    lines = []
+    lines.append('Texts:')
 
     for text in texts:
-        print('\n"{}"'.format(text.description))
+        lines.append('\n"{}"'.format(text.description))
 
         vertices = (['({},{})'.format(vertex.x, vertex.y)
                     for vertex in text.bounding_poly.vertices])
 
-        print('bounds: {}'.format(','.join(vertices)))
+        lines.append('bounds: {}'.format(','.join(vertices)))
+
+    return lines
     # [END migration_text_detection]
 # [END def_detect_text]
 
@@ -305,15 +347,19 @@ def detect_text_uri(uri):
 
     response = client.text_detection(image=image)
     texts = response.text_annotations
-    print('Texts:')
+
+    lines = []
+    lines.append('Texts:')
 
     for text in texts:
-        print('\n"{}"'.format(text.description))
+        lines.append('\n"{}"'.format(text.description))
 
         vertices = (['({},{})'.format(vertex.x, vertex.y)
                     for vertex in text.bounding_poly.vertices])
 
-        print('bounds: {}'.format(','.join(vertices)))
+        lines.append('bounds: {}'.format(','.join(vertices)))
+
+    return lines
 # [END def_detect_text_uri]
 
 
@@ -330,14 +376,18 @@ def detect_properties(path):
 
     response = client.image_properties(image=image)
     props = response.image_properties_annotation
-    print('Properties:')
+
+    lines = []
+    lines.append('Properties:')
 
     for color in props.dominant_colors.colors:
-        print('fraction: {}'.format(color.pixel_fraction))
-        print('\tr: {}'.format(color.color.red))
-        print('\tg: {}'.format(color.color.green))
-        print('\tb: {}'.format(color.color.blue))
-        print('\ta: {}'.format(color.color.alpha))
+        lines.append('fraction: {}'.format(color.pixel_fraction))
+        lines.append('\tr: {}'.format(color.color.red))
+        lines.append('\tg: {}'.format(color.color.green))
+        lines.append('\tb: {}'.format(color.color.blue))
+        lines.append('\ta: {}'.format(color.color.alpha))
+
+    return lines
     # [END migration_image_properties]
 # [END def_detect_properties]
 
@@ -352,14 +402,18 @@ def detect_properties_uri(uri):
 
     response = client.image_properties(image=image)
     props = response.image_properties_annotation
-    print('Properties:')
+
+    lines = []
+    lines.append('Properties:')
 
     for color in props.dominant_colors.colors:
-        print('frac: {}'.format(color.pixel_fraction))
-        print('\tr: {}'.format(color.color.red))
-        print('\tg: {}'.format(color.color.green))
-        print('\tb: {}'.format(color.color.blue))
-        print('\ta: {}'.format(color.color.alpha))
+        lines.append('frac: {}'.format(color.pixel_fraction))
+        lines.append('\tr: {}'.format(color.color.red))
+        lines.append('\tg: {}'.format(color.color.green))
+        lines.append('\tb: {}'.format(color.color.blue))
+        lines.append('\ta: {}'.format(color.color.alpha))
+
+    return lines
 # [END def_detect_properties_uri]
 
 
@@ -377,33 +431,37 @@ def detect_web(path):
     response = client.web_detection(image=image)
     notes = response.web_detection
 
+    lines = []
+
     if notes.pages_with_matching_images:
-        print('\n{} Pages with matching images retrieved'.format(
+        lines.append('\n{} Pages with matching images retrieved'.format(
                len(notes.pages_with_matching_images)))
 
         for page in notes.pages_with_matching_images:
-            print('Url   : {}'.format(page.url))
+            lines.append('Url   : {}'.format(page.url))
 
     if notes.full_matching_images:
-        print ('\n{} Full Matches found: '.format(
+        lines.append ('\n{} Full Matches found: '.format(
                len(notes.full_matching_images)))
 
         for image in notes.full_matching_images:
-            print('Url  : {}'.format(image.url))
+            lines.append('Url  : {}'.format(image.url))
 
     if notes.partial_matching_images:
-        print ('\n{} Partial Matches found: '.format(
+        lines.append ('\n{} Partial Matches found: '.format(
                len(notes.partial_matching_images)))
 
         for image in notes.partial_matching_images:
-            print('Url  : {}'.format(image.url))
+            lines.append('Url  : {}'.format(image.url))
 
     if notes.web_entities:
-        print ('\n{} Web entities found: '.format(len(notes.web_entities)))
+        lines.append ('\n{} Web entities found: '.format(len(notes.web_entities)))
 
         for entity in notes.web_entities:
-            print('Score      : {}'.format(entity.score))
-            print('Description: {}'.format(entity.description))
+            lines.append('Score      : {}'.format(entity.score))
+            lines.append('Description: {}'.format(entity.description))
+
+    return lines
     # [END migration_web_detection]
 # [END def_detect_web]
 
@@ -418,33 +476,39 @@ def detect_web_uri(uri):
     response = client.web_detection(image=image)
     notes = response.web_detection
 
+    lines = []
+
     if notes.pages_with_matching_images:
-        print('\n{} Pages with matching images retrieved'.format(
+        #print('\n{} Pages with matching images retrieved'.format(
+        #       len(notes.pages_with_matching_images)))
+        lines.append ('\n{} Pages with matching images retrieved'.format(
                len(notes.pages_with_matching_images)))
 
         for page in notes.pages_with_matching_images:
-            print('Url   : {}'.format(page.url))
+            lines.append('Url   : {}'.format(page.url))
 
     if notes.full_matching_images:
-        print ('\n{} Full Matches found: '.format(
+        lines.append ('\n{} Full Matches found: '.format(
                len(notes.full_matching_images)))
 
         for image in notes.full_matching_images:
-            print('Url  : {}'.format(image.url))
+            lines.append('Url  : {}'.format(image.url))
 
     if notes.partial_matching_images:
-        print ('\n{} Partial Matches found: '.format(
+        lines.append ('\n{} Partial Matches found: '.format(
                len(notes.partial_matching_images)))
 
         for image in notes.partial_matching_images:
-            print('Url  : {}'.format(image.url))
+            lines.append('Url  : {}'.format(image.url))
 
     if notes.web_entities:
-        print ('\n{} Web entities found: '.format(len(notes.web_entities)))
+        lines.append ('\n{} Web entities found: '.format(len(notes.web_entities)))
 
         for entity in notes.web_entities:
-            print('Score      : {}'.format(entity.score))
-            print('Description: {}'.format(entity.description))
+            lines.append('Score      : {}'.format(entity.score))
+            lines.append('Description: {}'.format(entity.description))
+
+    return lines
 # [END def_detect_web_uri]
 
 
@@ -464,13 +528,17 @@ def detect_crop_hints(path):
     response = client.crop_hints(image=image, image_context=image_context)
     hints = response.crop_hints_annotation.crop_hints
 
+    lines = []
+
     for n, hint in enumerate(hints):
-        print('\nCrop Hint: {}'.format(n))
+        lines.append('\nCrop Hint: {}'.format(n))
 
         vertices = (['({},{})'.format(vertex.x, vertex.y)
                     for vertex in hint.bounding_poly.vertices])
 
-        print('bounds: {}'.format(','.join(vertices)))
+        lines.append('bounds: {}'.format(','.join(vertices)))
+
+    return lines
     # [END migration_crop_hints]
 # [END def_detect_crop_hints]
 
@@ -488,13 +556,17 @@ def detect_crop_hints_uri(uri):
     response = client.crop_hints(image=image, image_context=image_context)
     hints = response.crop_hints_annotation.crop_hints
 
+    lines = []
+
     for n, hint in enumerate(hints):
-        print('\nCrop Hint: {}'.format(n))
+        lines.append('\nCrop Hint: {}'.format(n))
 
         vertices = (['({},{})'.format(vertex.x, vertex.y)
                     for vertex in hint.bounding_poly.vertices])
 
-        print('bounds: {}'.format(','.join(vertices)))
+        lines.append('bounds: {}'.format(','.join(vertices)))
+
+    return lines
 # [END def_detect_crop_hints_uri]
 
 
@@ -512,6 +584,8 @@ def detect_document(path):
     response = client.document_text_detection(image=image)
     document = response.full_text_annotation
 
+    lines = []
+
     for page in document.pages:
         for block in page.blocks:
             block_words = []
@@ -526,8 +600,10 @@ def detect_document(path):
             for symbol in block_symbols:
                 block_text = block_text + symbol.text
 
-            print('Block Content: {}'.format(block_text))
-            print('Block Bounds:\n {}'.format(block.bounding_box))
+            lines.append('Block Content: {}'.format(block_text))
+            lines.append('Block Bounds:\n {}'.format(block.bounding_box))
+
+    return lines
     # [END migration_document_text_detection]
 # [END def_detect_document]
 
@@ -543,6 +619,8 @@ def detect_document_uri(uri):
     response = client.document_text_detection(image=image)
     document = response.full_text_annotation
 
+    lines = []
+
     for page in document.pages:
         for block in page.blocks:
             block_words = []
@@ -557,8 +635,10 @@ def detect_document_uri(uri):
             for symbol in block_symbols:
                 block_text = block_text + symbol.text
 
-            print('Block Content: {}'.format(block_text))
-            print('Block Bounds:\n {}'.format(block.bounding_box))
+            lines.append('Block Content: {}'.format(block_text))
+            lines.append('Block Bounds:\n {}'.format(block.bounding_box))
+
+    return lines
 # [END def_detect_document_uri]
 
 ################################################################################
@@ -609,18 +689,18 @@ if __name__ == '__main__':
                 f.write(response.content)
 
             print ("\n\nDetecting web entities")
-            detect_web(filename)
+            print ('\n'.join(detect_web(filename)))
 
             print ("\n\nDetecting text from local image")
-            detect_text(filename)
+            print ('\n'.join(detect_text(filename)))
 
         else:
             #Image is not in Spark, we will send the URL to Google Cloud directly
             print ("\n\nDetecting web entities")
-            detect_web_uri(image_url)
+            print ('\n'.join(detect_web_uri(image_url)))
 
             print ("\n\nDetecting text from URI")
-            detect_text_uri(image_url)
+            print ('\n'.join(detect_text_uri(image_url)))
 
     else:
         print ("Invalid URL: ", image_url)
