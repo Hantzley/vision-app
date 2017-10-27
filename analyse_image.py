@@ -15,12 +15,6 @@ import os
 from google.cloud import vision
 from google.cloud.vision import types
 
-print_labels = True
-print_web_pages_with_matching_image = True
-print_web_pages_with_full_matching_image = False
-print_web_pages_with_partial_matching_image = False
-print_web_entities = True
-image_is_in_Spark = False
 filename = None
 
 # Set Spark Token on the next line, or use an env variable if you have one.
