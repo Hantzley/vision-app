@@ -298,6 +298,8 @@ def detect_safe_search_uri(uri):
     lines.append('medical: {}'.format(likelihood_name[safe.medical]))
     lines.append('spoofed: {}'.format(likelihood_name[safe.spoof]))
     lines.append('violence: {}'.format(likelihood_name[safe.violence]))
+
+    return lines
 # [END def_detect_safe_search_uri]
 
 
