@@ -103,5 +103,5 @@ ENV/
 # image files
 *.jpg
 *.jpeg
-*.git
+*.gif
 *.png
