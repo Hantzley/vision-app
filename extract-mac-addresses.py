@@ -23,7 +23,7 @@ filename = None
 
 
 def detect_mac_addresses(path):
-    """Detects MAC addresses in the file."""
+    """Detects MAC addresses in the image."""
     client = vision.ImageAnnotatorClient()
     mac_addresses = []
 
